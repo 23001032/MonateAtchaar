@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover authentic Monate Atchar - fresh, zesty flavors delivered to your door. Order online now!">
+    <meta name="keywords" content="atchar, South African food, spicy pickles, garlic atchar, hot atchar, mild atchar">
+    <title>Monate Atchar - Authentic South African Atchar Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fffbf0;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+        header {
+            background: linear-gradient(to right, #ff9900, #ff6600);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://source.unsplash.com/random/1920x300/?food,spicy,pickle') no-repeat center/cover;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        h1 {
+            margin: 0;
+            font-size: 3.5em;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1.5s ease-out;
+        }
+        .slogan {
+            font-style: italic;
+            font-size: 1.8em;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+            animation: bounceIn 2s ease-in-out;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        nav {
+            background-color: #ff9900;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 25px;
+            font-weight: 600;
+            transition: color 0.3s, transform 0.3s, background-color 0.3s;
+            padding: 8px 16px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            color: #ff6600;
+            background-color: white;
+            transform: scale(1.1);
+        }
+        nav a.active {
+            color: #ff6600;
+            background-color: white;
+            font-weight: 700;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+        h2 {
+            color: #ff6600;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: #ff9900;
+            margin: 10px auto 0;
+        }
+        .info {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        .product-card h3 {
+            margin: 20px 0 10px;
+            color: #ff6600;
+            font-size: 1.5em;
+        }
+        .product-card p {
+            margin: 0 20px 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .product-card .description {
+            margin: 0 20px 15px;
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+        }
+        form {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        label {
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+        }
+        select, input[type="number"], input[type="text"], input[type="email"], input[type="tel"], input[type="password"], textarea {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        select:focus, input:focus, textarea:focus {
+            border-color: #ff6600;
+            outline: none;
+        }
+        .total {
+            font-weight: bold;
+            font-size: 1.6em;
+            text-align: center;
+            color: #ff6600;
+        }
+        button {
+            background: linear-gradient(to right, #ff9900, #ff6600);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.3em;
+            font-weight: 600;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        button:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+        footer {
+            background-color: #ff9900;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+            margin-top: -15px;
+        }
+        .whatsapp-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            z-index: 1000;
+            text-decoration: none;
+        }
+        .whatsapp-icon:hover {
+            transform: scale(1.1);
+        }
+        .role-selection {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .dashboard {
+            display: none; /* Hidden by default */
+        }
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .stock-table th, .stock-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .stock-table th {
+            background-color: #ff9900;
+            color: white;
+        }
+        .logout-btn {
+            background: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #authSection {
+            display: none; /* Hidden initially */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1001;
+            background-color: #fffbf0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 90%;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+        #homeSections {
+            display: block; /* Always shown */
+        }
+        .auth-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .auth-link a {
+            color: #ff6600;
+            text-decoration: none;
+        }
+        .auth-link a:hover {
+            text-decoration: underline;
+        }
+        #registerContainer, #forgotContainer {
+            display: none;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #ff6600;
+        }
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        .loading {
+            text-align: center;
+            color: #ff6600;
+            display: none;
+            margin-top: -15px;
+        }
+        #regConfirmPassword {
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            header {
+                padding: 60px 20px;
+            }
+            h1 {
+                font-size: 2.8em;
+            }
+            .slogan {
+                font-size: 1.4em;
+            }
+            nav {
+                padding: 10px 0;
+            }
+            nav a {
+                margin: 0 10px;
+                font-size: 0.9em;
+                padding: 6px 12px;
+            }
+            .product-card img {
+                height: 200px;
+            }
+            #authSection {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Monate Atchar</h1>
+        <p class="slogan">Atchar for the Vhathu!!!</p>
+    </header>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#contact">Contact</a>
+        <a href="#dashboard" id="dashboardLink" style="display: none;">Dashboard</a>
+        <a href="#authSection" id="loginLink" title="Login/Register">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            <span class="sr-only">Login or Register</span>
+        </a>
+    </nav>
+
+    <div id="overlay" onclick="closePopup()"></div>
+
+    <!-- Auth Section: Login, Register, Forgot -->
+    <div id="authSection">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <!-- Login Container -->
+        <div id="loginContainer">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="loginEmail">Your Email:</label>
+                <input type="email" id="loginEmail" name="email" required>
+
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="password" required>
+
+                <div class="role-selection">
+                    <label><input type="radio" name="role" value="user" checked> User</label>
+                    <label><input type="radio" name="role" value="admin"> Admin</label>
+                </div>
+
+                <button type="submit">Login</button>
+                <p class="loading" id="loginLoading">Loading...</p>
+            </form>
+            <div class="auth-link"><a href="#" id="forgotLink">Forgot Password?</a></div>
+            <div class="auth-link"><a href="#" id="registerLink">Don't have an account? Register</a></div>
+        </div>
+
+        <!-- Register Container -->
+        <div id="registerContainer">
+            <h2>Register as User</h2>
+            <form id="registerForm">
+                <label for="regName">Your Name:</label>
+                <input type="text" id="regName" name="name" required>
+
+                <label for="regEmail">Your Email:</label>
+                <input type="email" id="regEmail" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                <span class="error" id="regEmailError">Please enter a valid email address containing '@'.</span>
+
+                <label for="regPhone">Your Phone Number:</label>
+                <input type="tel" id="regPhone" name="phone" required pattern="0[0-9]{9}" title="South African phone number: 10 digits starting with 0 (e.g., 0712568422)">
+                <span class="error" id="regPhoneError">Please enter a valid South African phone number (10 digits starting with 0).</span>
+
+                <label for="regAddress">Delivery Address:</label>
+                <textarea id="regAddress" name="address" rows="4" required></textarea>
+
+                <label for="regPassword">Password:</label>
+                <input type="password" id="regPassword" name="password" required minlength="6">
+
+                <label for="regConfirmPassword">Confirm Password:</label>
+                <input type="password" id="regConfirmPassword" required minlength="6">
+                <span class="error" id="passwordMatchError">Passwords do not match.</span>
+
+                <button type="submit">Register</button>
+                <p class="loading" id="registerLoading">Loading...</p>
+            </form>
+            <div class="auth-link"><a href="#" id="loginFromReg">Already have an account? Login</a></div>
+        </div>
+
+        <!-- Forgot Password Container -->
+        <div id="forgotContainer">
+            <h2>Forgot Password</h2>
+            <form id="forgotForm">
+                <label for="forgotEmail">Your Email:</label>
+                <input type="email" id="forgotEmail" name="email" required>
+
+                <button type="submit">Send Reset Email</button>
+                <p class="loading" id="forgotLoading">Loading...</p>
+            </form>
+            <div class="auth-link"><a href="#" id="backToLogin">Back to Login</a></div>
+        </div>
+    </div>
+
+    <!-- Home Sections: About, Products, Contact -->
+    <div id="homeSections">
+        <div class="container" id="about">
+            <div class="info">
+                <h2>About Us</h2>
+                <p>At Monate Atchar, we bring you the true essence of South African flavors with our handcrafted atchar. Made from the freshest mangoes, spices, and love, our atchar adds a perfect zesty kick to pap, braai, or any meal. We're passionate about quality and tradition, serving both on-campus and off-campus customers. Open every day from 8:00 to 20:00 for your convenience.</p>
+                <p>For inquiries or bulk orders, call us at 071 256 8422 or 076 562 6537. Delivery available within selected areas!</p>
+            </div>
+        </div>
+        <div class="container" id="products">
+            <h2>Our Delicious Flavors</h2>
+            <div class="products">
+                <div class="product-card">
+                    <img src="images/Plain.png" alt="Plain Atchar" onerror="this.src='https://via.placeholder.com/250?text=Plain+Atchar';">
+                    <h3>Plain Atchar</h3>
+                    <p class="description">Classic tangy goodness with just the right balance of spices. Perfect for everyday meals.</p>
+                    <p>R60 (Medium Size)</p>
+                </div>
+                <div class="product-card">
+                    <img src="images/Garlic.png" alt="Garlic Atchar" onerror="this.src='https://via.placeholder.com/250?text=Garlic+Atchar';">
+                    <h3>Garlic Atchar</h3>
+                    <p class="description">Infused with fresh garlic for an extra aromatic punch. Ideal for garlic lovers!</p>
+                    <p>R60 (Medium Size)</p>
+                </div>
+                <div class="product-card">
+                    <img src="images/Hot.png" alt="Hot Atchar" onerror="this.src='https://via.placeholder.com/250?text=Hot+Atchar';">
+                    <h3>Hot Atchar</h3>
+                    <p class="description">Fiery and bold with chilies that pack a heat. For those who like it spicy!</p>
+                    <p>R60 (Medium Size)</p>
+                </div>
+                <div class="product-card">
+                    <img src="images/Mild.png" alt="Mild Atchar" onerror="this.src='https://via.placeholder.com/250?text=Mild+Atchar';">
+                    <h3>Mild Atchar</h3>
+                    <p class="description">Gentle flavors with subtle spices. Great for kids or mild palates.</p>
+                    <p>R60 (Medium Size)</p>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="contact">
+            <h2>Contact Us</h2>
+            <div class="info">
+                <p><i class="fas fa-phone"></i> Phone: 071 256 8422 | 076 562 6537</p>
+                <p><i class="fas fa-clock"></i> Open Daily: 8:00 - 20:00</p>
+                <p><i class="fas fa-map-marker-alt"></i> Location: University of Venda, Thohoyandou, Limpopo Province. Available on campus and off campus – Delivery in selected areas.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Dashboard -->
+    <div class="container dashboard" id="userDashboard">
+        <h2>User Dashboard</h2>
+        <p>Welcome, <span id="userName"></span>!</p>
+        <h3>Place Your Order</h3>
+        <form id="userOrderForm">
+            <label for="userFlavor">Select Flavor:</label>
+            <select id="userFlavor" name="flavor" required>
+                <option value="">Choose a flavor</option>
+                <option value="plain">Plain</option>
+                <option value="garlic">Garlic</option>
+                <option value="hot">Hot</option>
+                <option value="mild">Mild</option>
+            </select>
+
+            <label for="userQuantity">Quantity:</label>
+            <input type="number" id="userQuantity" name="quantity" min="1" value="1" required>
+
+            <div class="total" id="userTotalPrice">Total: R60</div>
+
+            <label for="userNotes">Additional Notes:</label>
+            <textarea id="userNotes" name="notes" rows="3"></textarea>
+
+            <button type="submit">Submit Order <i class="fas fa-arrow-right"></i></button>
+            <p class="loading" id="orderLoading">Loading...</p>
+        </form>
+        <h3>Your Order History</h3>
+        <div id="userOrderHistory"></div>
+        <button type="button" class="logout-btn" id="userLogout">Logout</button>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="container dashboard" id="adminDashboard">
+        <h2>Admin Dashboard</h2>
+        <p>Welcome, Admin!</p>
+        <h3>Manage Stock</h3>
+        <table class="stock-table">
+            <thead>
+                <tr>
+                    <th>Flavor</th>
+                    <th>Current Stock</th>
+                    <th>Update Stock</th>
+                </tr>
+            </thead>
+            <tbody id="stockTableBody">
+                <!-- Dynamically populated -->
+            </tbody>
+        </table>
+        <h3>Recent Orders</h3>
+        <div id="recentOrders"></div>
+        <button type="button" class="logout-btn" id="adminLogout">Logout</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Monate Atchar. All rights reserved.</p>
+    </footer>
+
+    <a href="https://wa.me/27765626537" target="_blank" class="whatsapp-icon" aria-label="Contact us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script type="module">
+        // Import Firebase SDKs
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.12.1/firebase-analytics.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js';
+        import { getFirestore, collection, addDoc, doc, setDoc, getDoc, updateDoc, getDocs, onSnapshot, query, orderBy, limit, where } from 'https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyAq8012dXtifgRpBzD9L0jVz8Y-y2hwJHI",
+          authDomain: "monateatcharorders-caa7b.firebaseapp.com",
+          projectId: "monateatcharorders-caa7b",
+          storageBucket: "monateatcharorders-caa7b.appspot.com",
+          messagingSenderId: "580208795862",
+          appId: "1:580208795862:web:fbca708465b8c34138e977",
+          measurementId: "G-B67L2792K0"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        getAnalytics(app);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Elements
+        const authSection = document.getElementById('authSection');
+        const overlay = document.getElementById('overlay');
+        const homeSections = document.getElementById('homeSections');
+        const userDashboard = document.getElementById('userDashboard');
+        const adminDashboard = document.getElementById('adminDashboard');
+        const whatsappIcon = document.querySelector('.whatsapp-icon');
+        const loginLink = document.getElementById('loginLink');
+        const dashboardLink = document.getElementById('dashboardLink');
+        const navLinks = document.querySelectorAll('nav a:not(#loginLink):not(#dashboardLink)');
+
+        // Auth containers
+        const loginContainer = document.getElementById('loginContainer');
+        const registerContainer = document.getElementById('registerContainer');
+        const forgotContainer = document.getElementById('forgotContainer');
+
+        // Loading elements
+        const loginLoading = document.getElementById('loginLoading');
+        const registerLoading = document.getElementById('registerLoading');
+        const forgotLoading = document.getElementById('forgotLoading');
+        const orderLoading = document.getElementById('orderLoading');
+
+        // Toggle links
+        document.getElementById('registerLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            loginContainer.style.display = 'none';
+            registerContainer.style.display = 'block';
+            forgotContainer.style.display = 'none';
+        });
+
+        document.getElementById('loginFromReg').addEventListener('click', (e) => {
+            e.preventDefault();
+            loginContainer.style.display = 'block';
+            registerContainer.style.display = 'none';
+            forgotContainer.style.display = 'none';
+        });
+
+        document.getElementById('forgotLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            loginContainer.style.display = 'none';
+            registerContainer.style.display = 'none';
+            forgotContainer.style.display = 'block';
+        });
+
+        document.getElementById('backToLogin').addEventListener('click', (e) => {
+            e.preventDefault();
+            loginContainer.style.display = 'block';
+            registerContainer.style.display = 'none';
+            forgotContainer.style.display = 'none';
+        });
+
+        // Initial setup
+        homeSections.style.display = 'block';
+        navLinks.forEach(link => link.style.display = 'inline');
+        loginLink.style.display = 'inline';
+        dashboardLink.style.display = 'none';
+        authSection.style.display = 'none';
+        overlay.style.display = 'none';
+
+        // Auth state listener
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                if (userDoc.exists()) {
+                    const role = userDoc.data().role;
+                    authSection.style.display = 'none';
+                    overlay.style.display = 'none';
+                    homeSections.style.display = 'block';
+                    navLinks.forEach(link => link.style.display = 'inline');
+                    dashboardLink.style.display = 'inline';
+                    loginLink.innerHTML = '<i class="fas fa-sign-out-alt"></i>';
+                    loginLink.title = 'Logout';
+                    loginLink.href = '#';
+                    loginLink.onclick = (e) => {
+                        e.preventDefault();
+                        signOut(auth);
+                    };
+                    if (role === 'user') {
+                        dashboardLink.href = '#userDashboard';
+                        userDashboard.style.display = 'block';
+                        adminDashboard.style.display = 'none';
+                        whatsappIcon.style.display = 'flex';
+                        document.getElementById('userName').textContent = userDoc.data().name;
+                        loadUserOrderHistory(user.uid);
+                    } else if (role === 'admin') {
+                        dashboardLink.href = '#adminDashboard';
+                        userDashboard.style.display = 'none';
+                        adminDashboard.style.display = 'block';
+                        whatsappIcon.style.display = 'none';
+                        loadAdminDashboard();
+                    }
+                }
+            } else {
+                authSection.style.display = 'none';
+                overlay.style.display = 'none';
+                homeSections.style.display = 'block';
+                userDashboard.style.display = 'none';
+                adminDashboard.style.display = 'none';
+                whatsappIcon.style.display = 'none';
+                navLinks.forEach(link => link.style.display = 'inline');
+                dashboardLink.style.display = 'none';
+                loginLink.innerHTML = '<i class="fas fa-user"></i>';
+                loginLink.title = 'Login/Register';
+                loginLink.href = '#authSection';
+                loginLink.onclick = (e) => {
+                    e.preventDefault();
+                    authSection.style.display = 'block';
+                    overlay.style.display = 'block';
+                    loginContainer.style.display = 'block';
+                    registerContainer.style.display = 'none';
+                    forgotContainer.style.display = 'none';
+                };
+            }
+        });
+
+        // Function to close popup
+        window.closePopup = function() {
+            authSection.style.display = 'none';
+            overlay.style.display = 'none';
+        };
+
+        // Register Form
+        const registerForm = document.getElementById('registerForm');
+        registerForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(registerForm);
+            const email = formData.get('email');
+            const password = formData.get('password');
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            const name = formData.get('name');
+            const phone = formData.get('phone').replace(/\s|-/g, '');
+            const address = formData.get('address');
+
+            if (password !== confirmPassword) {
+                document.getElementById('passwordMatchError').style.display = 'block';
+                return;
+            } else {
+                document.getElementById('passwordMatchError').style.display = 'none';
+            }
+
+            // Validation (simplified)
+            if (!email.includes('@') || !/^0\d{9}$/.test(phone)) {
+                alert('Invalid email or phone');
+                return;
+            }
+
+            registerLoading.style.display = 'block';
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                await setDoc(doc(db, 'users', userCredential.user.uid), {
+                    name, email, phone, address, role: 'user'
+                });
+                await sendEmailVerification(userCredential.user);
+                alert('Registration successful! Please check your email for verification and then login.');
+                registerForm.reset();
+                // Switch to login
+                loginContainer.style.display = 'block';
+                registerContainer.style.display = 'none';
+            } catch (error) {
+                alert(error.message);
+            } finally {
+                registerLoading.style.display = 'none';
+            }
+        });
+
+        // Login Form
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(loginForm);
+            const email = formData.get('email');
+            const password = formData.get('password');
+            const selectedRole = formData.get('role');
+
+            loginLoading.style.display = 'block';
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                if (!userCredential.user.emailVerified) {
+                    alert('Please verify your email before logging in.');
+                    signOut(auth);
+                    return;
+                }
+                const userDoc = await getDoc(doc(db, 'users', userCredential.user.uid));
+                if (userDoc.exists() && userDoc.data().role === selectedRole) {
+                    // Login successful, hide auth
+                    authSection.style.display = 'none';
+                    overlay.style.display = 'none';
+                } else {
+                    throw new Error('Invalid role for this user.');
+                }
+            } catch (error) {
+                alert(error.message);
+            } finally {
+                loginLoading.style.display = 'none';
+            }
+        });
+
+        // Forgot Password Form
+        const forgotForm = document.getElementById('forgotForm');
+        forgotForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(forgotForm);
+            const email = formData.get('email');
+
+            forgotLoading.style.display = 'block';
+            try {
+                await sendPasswordResetEmail(auth, email);
+                alert('Password reset email sent! Check your inbox.');
+                forgotForm.reset();
+                // Switch back to login
+                loginContainer.style.display = 'block';
+                forgotContainer.style.display = 'none';
+            } catch (error) {
+                alert(error.message);
+            } finally {
+                forgotLoading.style.display = 'none';
+            }
+        });
+
+        // User Order Form
+        const userOrderForm = document.getElementById('userOrderForm');
+        const userQuantity = document.getElementById('userQuantity');
+        const userTotalPrice = document.getElementById('userTotalPrice');
+
+        userQuantity.addEventListener('input', () => {
+            const qty = parseInt(userQuantity.value) || 1;
+            const total = qty * 60;
+            userTotalPrice.textContent = `Total: R${total}`;
+        });
+
+        userOrderForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const user = auth.currentUser;
+            if (!user) return;
+
+            const formData = new FormData(userOrderForm);
+            const flavor = formData.get('flavor');
+            const quantity = parseInt(formData.get('quantity'));
+            const notes = formData.get('notes');
+
+            const userDoc = await getDoc(doc(db, 'users', user.uid));
+            const userData = userDoc.data();
+
+            // Check stock
+            const stockDoc = await getDoc(doc(db, 'stock', flavor));
+            if (!stockDoc.exists() || stockDoc.data().quantity < quantity) {
+                alert('Insufficient stock for this flavor.');
+                return;
+            }
+
+            orderLoading.style.display = 'block';
+            const orderDetails = {
+                flavor,
+                quantity,
+                totalPrice: quantity * 60,
+                name: userData.name,
+                email: userData.email,
+                phone: userData.phone,
+                address: userData.address,
+                notes,
+                timestamp: new Date().toISOString(),
+                userId: user.uid
+            };
+
+            try {
+                const docRef = await addDoc(collection(db, 'orders'), orderDetails);
+                // Update stock
+                await updateDoc(doc(db, 'stock', flavor), {
+                    quantity: stockDoc.data().quantity - quantity
+                });
+                alert(`Thank you for your order!\nOrder ID: ${docRef.id}`);
+                userOrderForm.reset();
+                userTotalPrice.textContent = 'Total: R60';
+                loadUserOrderHistory(user.uid);
+            } catch (error) {
+                alert('Error submitting order.');
+            } finally {
+                orderLoading.style.display = 'none';
+            }
+        });
+
+        // Load user order history
+        function loadUserOrderHistory(userId) {
+            const ordersQuery = query(collection(db, 'orders'), where('userId', '==', userId), orderBy('timestamp', 'desc'));
+            onSnapshot(ordersQuery, (snapshot) => {
+                const userOrderHistory = document.getElementById('userOrderHistory');
+                userOrderHistory.innerHTML = '';
+                if (snapshot.empty) {
+                    userOrderHistory.innerHTML = '<p>No orders yet.</p>';
+                } else {
+                    snapshot.forEach((doc) => {
+                        const data = doc.data();
+                        userOrderHistory.innerHTML += `<p>Order ID: ${doc.id} | Flavor: ${data.flavor} | Qty: ${data.quantity} | Total: R${data.totalPrice} | Time: ${data.timestamp}</p>`;
+                    });
+                }
+            });
+        }
+
+        // Logout buttons (optional, since logout in nav)
+        document.getElementById('userLogout').addEventListener('click', () => signOut(auth));
+        document.getElementById('adminLogout').addEventListener('click', () => signOut(auth));
+
+        // Admin Dashboard Load
+        async function loadAdminDashboard() {
+            // Load stock
+            const flavors = ['plain', 'garlic', 'hot', 'mild'];
+            const stockTableBody = document.getElementById('stockTableBody');
+            stockTableBody.innerHTML = '';
+            for (const flavor of flavors) {
+                const stockDoc = await getDoc(doc(db, 'stock', flavor));
+                const quantity = stockDoc.exists() ? stockDoc.data().quantity : 0;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${flavor.charAt(0).toUpperCase() + flavor.slice(1)}</td>
+                    <td>${quantity}</td>
+                    <td><input type="number" value="${quantity}" data-flavor="${flavor}"><button onclick="updateStock('${flavor}', this.previousElementSibling.value)">Update</button></td>
+                `;
+                stockTableBody.appendChild(row);
+            }
+
+            // Load recent orders
+            const ordersQuery = query(collection(db, 'orders'), orderBy('timestamp', 'desc'), limit(10));
+            onSnapshot(ordersQuery, (snapshot) => {
+                const recentOrders = document.getElementById('recentOrders');
+                recentOrders.innerHTML = '';
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    recentOrders.innerHTML += `<p>Order ID: ${doc.id} | Flavor: ${data.flavor} | Qty: ${data.quantity} | Total: R${data.totalPrice} | Time: ${data.timestamp}</p>`;
+                });
+            });
+        }
+
+        // Update stock function
+        window.updateStock = async (flavor, newQuantity) => {
+            try {
+                await updateDoc(doc(db, 'stock', flavor), { quantity: parseInt(newQuantity) });
+                alert('Stock updated.');
+                loadAdminDashboard();
+            } catch (error) {
+                alert('Error updating stock.');
+            }
+        };
+
+        // Nav functionality remains similar
+        const sections = document.querySelectorAll('.container[id]');
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50px 0px -50px 0px',
+            threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries) => {
+            let visibleSections = entries.filter(entry => entry.isIntersecting);
+            if (visibleSections.length > 0) {
+                visibleSections.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+                const topId = visibleSections[0].target.id;
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${topId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        }, observerOptions);
+        sections.forEach(section => observer.observe(section));
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                document.querySelectorAll('nav a').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
