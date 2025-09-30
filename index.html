@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Base Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -16,14 +17,18 @@
             background-color: #fffbf0;
             color: #333;
             scroll-behavior: smooth;
+            transition: background-color 0.3s ease;
         }
+
+        /* Header Styles */
         header {
             background: linear-gradient(to right, #ff9900, #ff6600);
             color: white;
             text-align: center;
-            padding: 100px 20px;
+            padding: 120px 20px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
         header::before {
             content: '';
@@ -33,72 +38,71 @@
             width: 100%;
             height: 100%;
             background: url('https://source.unsplash.com/random/1920x300/?food,spicy,pickle') no-repeat center/cover;
-            opacity: 0.3;
+            opacity: 0.4;
             z-index: 0;
         }
         h1 {
             margin: 0;
-            font-size: 3.5em;
+            font-size: 4em;
             position: relative;
             z-index: 1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
             animation: fadeInDown 1.5s ease-out;
         }
         .slogan {
             font-style: italic;
-            font-size: 1.8em;
-            margin-top: 10px;
+            font-size: 2em;
+            margin-top: 15px;
             position: relative;
             z-index: 1;
             animation: bounceIn 2s ease-in-out;
         }
+
+        /* Animations */
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         @keyframes bounceIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-            70% {
-                transform: scale(0.9);
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
         }
+
+        /* Navigation Styles */
         nav {
             background-color: #ff9900;
             padding: 15px 0;
-            text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        nav:hover {
+            background-color: #ff8000;
+        }
+        nav .main-links {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
         }
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 25px;
+            margin: 0 30px;
             font-weight: 600;
             transition: color 0.3s, transform 0.3s, background-color 0.3s;
-            padding: 8px 16px;
-            border-radius: 5px;
+            padding: 10px 20px;
+            border-radius: 8px;
         }
         nav a:hover {
             color: #ff6600;
-            background-color: white;
+            background-color: rgba(255,255,255,0.2);
             transform: scale(1.1);
         }
         nav a.active {
@@ -106,10 +110,19 @@
             background-color: white;
             font-weight: 700;
         }
+        nav #loginLink {
+            margin-left: auto;
+            margin-right: 20px;
+        }
+
+        /* Container and Section Styles */
         .container {
             max-width: 1200px;
             margin: 60px auto;
             padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         h2 {
             color: #ff6600;
@@ -121,10 +134,11 @@
         h2::after {
             content: '';
             display: block;
-            width: 100px;
-            height: 3px;
+            width: 120px;
+            height: 4px;
             background: #ff9900;
             margin: 10px auto 0;
+            border-radius: 2px;
         }
         .info {
             text-align: center;
@@ -133,6 +147,8 @@
             line-height: 1.8;
             font-size: 1.1em;
         }
+
+        /* Product Styles */
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -141,15 +157,16 @@
         }
         .product-card {
             background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             overflow: hidden;
             text-align: center;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
         }
         .product-card:hover {
             transform: translateY(-15px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         .product-card img {
             width: 100%;
@@ -158,24 +175,26 @@
             transition: transform 0.4s ease;
         }
         .product-card:hover img {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
         .product-card h3 {
             margin: 20px 0 10px;
             color: #ff6600;
-            font-size: 1.5em;
+            font-size: 1.6em;
         }
         .product-card p {
             margin: 0 20px 20px;
             font-weight: bold;
-            font-size: 1.2em;
+            font-size: 1.3em;
         }
         .product-card .description {
             margin: 0 20px 15px;
-            font-size: 0.9em;
-            color: #666;
-            line-height: 1.5;
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
         }
+
+        /* Form Styles */
         form {
             max-width: 700px;
             margin: 0 auto;
@@ -199,10 +218,11 @@
             width: 100%;
             box-sizing: border-box;
             font-size: 1em;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
         select:focus, input:focus, textarea:focus {
             border-color: #ff6600;
+            box-shadow: 0 0 8px rgba(255,102,0,0.3);
             outline: none;
         }
         .total {
@@ -220,62 +240,80 @@
             cursor: pointer;
             font-size: 1.3em;
             font-weight: 600;
-            transition: opacity 0.3s, transform 0.3s;
+            transition: opacity 0.3s, transform 0.3s, box-shadow 0.3s;
         }
         button:hover {
             opacity: 0.9;
             transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(255,102,0,0.4);
         }
+
+        /* Footer Styles */
         footer {
             background-color: #ff9900;
             color: white;
             text-align: center;
             padding: 30px;
             margin-top: 60px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
         }
+
+        /* Error and Loading Styles */
         .error {
             color: red;
             font-size: 0.9em;
             display: none;
             margin-top: -15px;
         }
+        .loading {
+            text-align: center;
+            color: #ff6600;
+            display: none;
+            margin-top: -15px;
+        }
+
+        /* WhatsApp Icon */
         .whatsapp-icon {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 30px;
+            right: 30px;
             background-color: #25D366;
             color: white;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: none; /* Hidden by default */
+            width: 70px;
+            height: 70px;
+            display: none;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: transform 0.3s;
+            font-size: 45px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
             z-index: 1000;
             text-decoration: none;
         }
         .whatsapp-icon:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
         }
+
+        /* Other Styles */
         .role-selection {
             display: flex;
             justify-content: center;
             gap: 20px;
         }
         .dashboard {
-            display: none; /* Hidden by default */
+            display: none;
         }
         .stock-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .stock-table th, .stock-table td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
             text-align: left;
         }
         .stock-table th {
@@ -285,38 +323,43 @@
         .logout-btn {
             background: #ff6600;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .logout-btn:hover {
+            background: #ff5500;
         }
         #authSection {
-            display: none; /* Hidden initially */
+            display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1001;
             background-color: #fffbf0;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            max-width: 500px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 550px;
             width: 90%;
             overflow-y: auto;
-            max-height: 80vh;
+            max-height: 85vh;
         }
         #homeSections {
-            display: block; /* Always shown */
+            display: block;
         }
         .auth-link {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 15px;
         }
         .auth-link a {
             color: #ff6600;
             text-decoration: none;
+            font-weight: 600;
         }
         .auth-link a:hover {
             text-decoration: underline;
@@ -326,11 +369,15 @@
         }
         .close-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.5em;
+            top: 15px;
+            right: 15px;
+            font-size: 1.8em;
             cursor: pointer;
             color: #ff6600;
+            transition: color 0.3s;
+        }
+        .close-btn:hover {
+            color: #ff5500;
         }
         #overlay {
             display: none;
@@ -339,75 +386,142 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             z-index: 1000;
-        }
-        .loading {
-            text-align: center;
-            color: #ff6600;
-            display: none;
-            margin-top: -15px;
         }
         #regConfirmPassword {
             margin-top: 10px;
         }
+        .user-info {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        .user-info p {
+            margin: 12px 0;
+            font-size: 1.2em;
+        }
+        .password-strength {
+            margin-top: -10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        .cart-item button {
+            background: #ff6600;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .cart-item button:hover {
+            background: #ff5500;
+        }
+
+        /* Admin Specific Styles */
+        .admin-mode body {
+            background-color: #f8f8f8;
+        }
+        .admin-mode .container {
+            margin-top: 20px;
+        }
+
+        /* Media Queries */
         @media (max-width: 768px) {
             header {
-                padding: 60px 20px;
+                padding: 80px 20px;
             }
             h1 {
-                font-size: 2.8em;
+                font-size: 3em;
             }
             .slogan {
-                font-size: 1.4em;
+                font-size: 1.6em;
             }
             nav {
                 padding: 10px 0;
+                flex-wrap: wrap;
             }
             nav a {
-                margin: 0 10px;
-                font-size: 0.9em;
-                padding: 6px 12px;
+                margin: 0 15px;
+                font-size: 1em;
+                padding: 8px 16px;
             }
             .product-card img {
-                height: 200px;
+                height: 220px;
             }
             #authSection {
-                padding: 20px;
+                padding: 30px;
+            }
+            nav #loginLink {
+                margin-left: auto;
+                margin-right: 15px;
+            }
+        }
+        @media (max-width: 480px) {
+            .products {
+                grid-template-columns: 1fr;
+            }
+            form {
+                padding: 30px;
+            }
+            .whatsapp-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 35px;
+                bottom: 20px;
+                right: 20px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <h1>Monate Atchar</h1>
         <p class="slogan">Atchar for the Vhathu!!!</p>
     </header>
+
+    <!-- Navigation -->
     <nav>
-        <a href="#about">About</a>
-        <a href="#products">Products</a>
-        <a href="#contact">Contact</a>
-        <a href="#dashboard" id="dashboardLink" style="display: none;">Dashboard</a>
+        <div class="main-links">
+            <a href="#about" class="home-link">About</a>
+            <a href="#products" class="home-link">Products</a>
+            <a href="#contact" class="home-link">Contact</a>
+            <a href="#dashboard" id="dashboardLink" style="display: none;">Dashboard</a>
+        </div>
         <a href="#authSection" id="loginLink" title="Login/Register">
             <i class="fas fa-user" aria-hidden="true"></i>
             <span class="sr-only">Login or Register</span>
         </a>
     </nav>
 
+    <!-- Overlay for Popups -->
     <div id="overlay" onclick="closePopup()"></div>
 
-    <!-- Auth Section: Login, Register, Forgot -->
-    <div id="authSection">
+    <!-- Authentication Section -->
+    <div id="authSection" role="dialog" aria-modal="true">
         <span class="close-btn" onclick="closePopup()">&times;</span>
-        <!-- Login Container -->
+        <!-- Login Form -->
         <div id="loginContainer">
             <h2>Login</h2>
             <form id="loginForm">
                 <label for="loginEmail">Your Email:</label>
-                <input type="email" id="loginEmail" name="email" required>
+                <input type="email" id="loginEmail" name="email" required aria-required="true">
 
                 <label for="loginPassword">Password:</label>
-                <input type="password" id="loginPassword" name="password" required>
+                <input type="password" id="loginPassword" name="password" required aria-required="true">
 
                 <div class="role-selection">
                     <label><input type="radio" name="role" value="user" checked> User</label>
@@ -416,34 +530,36 @@
 
                 <button type="submit">Login</button>
                 <p class="loading" id="loginLoading">Loading...</p>
+                <span class="error" id="loginError"></span>
             </form>
             <div class="auth-link"><a href="#" id="forgotLink">Forgot Password?</a></div>
             <div class="auth-link"><a href="#" id="registerLink">Don't have an account? Register</a></div>
         </div>
 
-        <!-- Register Container -->
+        <!-- Register Form -->
         <div id="registerContainer">
             <h2>Register as User</h2>
             <form id="registerForm">
                 <label for="regName">Your Name:</label>
-                <input type="text" id="regName" name="name" required>
+                <input type="text" id="regName" name="name" required aria-required="true">
 
                 <label for="regEmail">Your Email:</label>
-                <input type="email" id="regEmail" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
-                <span class="error" id="regEmailError">Please enter a valid email address containing '@'.</span>
+                <input type="email" id="regEmail" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" aria-required="true">
+                <span class="error" id="regEmailError">Please enter a valid email address.</span>
 
                 <label for="regPhone">Your Phone Number:</label>
-                <input type="tel" id="regPhone" name="phone" required pattern="0[0-9]{9}" title="South African phone number: 10 digits starting with 0 (e.g., 0712568422)">
-                <span class="error" id="regPhoneError">Please enter a valid South African phone number (10 digits starting with 0).</span>
+                <input type="tel" id="regPhone" name="phone" required pattern="[+]?[0-9]{10,12}" title="Phone number: 10-12 digits, optional + prefix">
+                <span class="error" id="regPhoneError">Please enter a valid phone number.</span>
 
                 <label for="regAddress">Delivery Address:</label>
-                <textarea id="regAddress" name="address" rows="4" required></textarea>
+                <textarea id="regAddress" name="address" rows="4" required aria-required="true"></textarea>
 
                 <label for="regPassword">Password:</label>
-                <input type="password" id="regPassword" name="password" required minlength="6">
+                <input type="password" id="regPassword" name="password" required minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least 8 characters, with uppercase, lowercase, and number." aria-required="true">
+                <span id="passwordStrength" class="password-strength"></span>
 
                 <label for="regConfirmPassword">Confirm Password:</label>
-                <input type="password" id="regConfirmPassword" required minlength="6">
+                <input type="password" id="regConfirmPassword" required minlength="8" aria-required="true">
                 <span class="error" id="passwordMatchError">Passwords do not match.</span>
 
                 <button type="submit">Register</button>
@@ -452,12 +568,12 @@
             <div class="auth-link"><a href="#" id="loginFromReg">Already have an account? Login</a></div>
         </div>
 
-        <!-- Forgot Password Container -->
+        <!-- Forgot Password Form -->
         <div id="forgotContainer">
             <h2>Forgot Password</h2>
             <form id="forgotForm">
                 <label for="forgotEmail">Your Email:</label>
-                <input type="email" id="forgotEmail" name="email" required>
+                <input type="email" id="forgotEmail" name="email" required aria-required="true">
 
                 <button type="submit">Send Reset Email</button>
                 <p class="loading" id="forgotLoading">Loading...</p>
@@ -466,7 +582,7 @@
         </div>
     </div>
 
-    <!-- Home Sections: About, Products, Contact -->
+    <!-- Home Sections -->
     <div id="homeSections">
         <div class="container" id="about">
             <div class="info">
@@ -477,32 +593,7 @@
         </div>
         <div class="container" id="products">
             <h2>Our Delicious Flavors</h2>
-            <div class="products">
-                <div class="product-card">
-                    <img src="images/Plain.png" alt="Plain Atchar" onerror="this.src='https://via.placeholder.com/250?text=Plain+Atchar';">
-                    <h3>Plain Atchar</h3>
-                    <p class="description">Classic tangy goodness with just the right balance of spices. Perfect for everyday meals.</p>
-                    <p>R60 (Medium Size)</p>
-                </div>
-                <div class="product-card">
-                    <img src="images/Garlic.png" alt="Garlic Atchar" onerror="this.src='https://via.placeholder.com/250?text=Garlic+Atchar';">
-                    <h3>Garlic Atchar</h3>
-                    <p class="description">Infused with fresh garlic for an extra aromatic punch. Ideal for garlic lovers!</p>
-                    <p>R60 (Medium Size)</p>
-                </div>
-                <div class="product-card">
-                    <img src="images/Hot.png" alt="Hot Atchar" onerror="this.src='https://via.placeholder.com/250?text=Hot+Atchar';">
-                    <h3>Hot Atchar</h3>
-                    <p class="description">Fiery and bold with chilies that pack a heat. For those who like it spicy!</p>
-                    <p>R60 (Medium Size)</p>
-                </div>
-                <div class="product-card">
-                    <img src="images/Mild.png" alt="Mild Atchar" onerror="this.src='https://via.placeholder.com/250?text=Mild+Atchar';">
-                    <h3>Mild Atchar</h3>
-                    <p class="description">Gentle flavors with subtle spices. Great for kids or mild palates.</p>
-                    <p>R60 (Medium Size)</p>
-                </div>
-            </div>
+            <div class="products" id="homeProducts"></div> <!-- Dynamically populated -->
         </div>
         <div class="container" id="contact">
             <h2>Contact Us</h2>
@@ -517,32 +608,22 @@
     <!-- User Dashboard -->
     <div class="container dashboard" id="userDashboard">
         <h2>User Dashboard</h2>
-        <p>Welcome, <span id="userName"></span>!</p>
-        <h3>Place Your Order</h3>
-        <form id="userOrderForm">
-            <label for="userFlavor">Select Flavor:</label>
-            <select id="userFlavor" name="flavor" required>
-                <option value="">Choose a flavor</option>
-                <option value="plain">Plain</option>
-                <option value="garlic">Garlic</option>
-                <option value="hot">Hot</option>
-                <option value="mild">Mild</option>
-            </select>
-
-            <label for="userQuantity">Quantity:</label>
-            <input type="number" id="userQuantity" name="quantity" min="1" value="1" required>
-
-            <div class="total" id="userTotalPrice">Total: R60</div>
-
-            <label for="userNotes">Additional Notes:</label>
-            <textarea id="userNotes" name="notes" rows="3"></textarea>
-
-            <button type="submit">Submit Order <i class="fas fa-arrow-right"></i></button>
-            <p class="loading" id="orderLoading">Loading...</p>
-        </form>
+        <div class="user-info">
+            <p><strong>Name:</strong> <span id="userName"></span></p>
+            <p><strong>Email:</strong> <span id="userEmail"></span></p>
+            <p><strong>Phone:</strong> <span id="userPhone"></span></p>
+            <p><strong>Address:</strong> <span id="userAddress"></span></p>
+        </div>
+        <h3>Our Delicious Flavors</h3>
+        <div class="products" id="userProducts"></div> <!-- Dynamically populated with add to cart buttons -->
+        <h3>Your Cart</h3>
+        <div id="userCart"></div>
+        <div class="total" id="cartTotal">Total: R0</div>
+        <textarea id="userNotes" placeholder="Additional Notes" rows="3"></textarea>
+        <button id="submitOrder" type="button">Submit Order</button>
+        <p class="loading" id="orderLoading">Loading...</p>
         <h3>Your Order History</h3>
         <div id="userOrderHistory"></div>
-        <button type="button" class="logout-btn" id="userLogout">Logout</button>
     </div>
 
     <!-- Admin Dashboard -->
@@ -558,48 +639,46 @@
                     <th>Update Stock</th>
                 </tr>
             </thead>
-            <tbody id="stockTableBody">
-                <!-- Dynamically populated -->
-            </tbody>
+            <tbody id="stockTableBody"></tbody>
         </table>
         <h3>Recent Orders</h3>
         <div id="recentOrders"></div>
         <button type="button" class="logout-btn" id="adminLogout">Logout</button>
     </div>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 Monate Atchar. All rights reserved.</p>
     </footer>
 
+    <!-- WhatsApp Icon -->
     <a href="https://wa.me/27765626537" target="_blank" class="whatsapp-icon" aria-label="Contact us on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script type="module">
-        // Import Firebase SDKs
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js';
-        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.12.1/firebase-analytics.js';
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js';
-        import { getFirestore, collection, addDoc, doc, setDoc, getDoc, updateDoc, getDocs, onSnapshot, query, orderBy, limit, where } from 'https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js';
-
-        // Firebase configuration
+        // Firebase Configuration - REPLACE WITH YOUR ACTUAL VALUES!
         const firebaseConfig = {
-          apiKey: "AIzaSyAq8012dXtifgRpBzD9L0jVz8Y-y2hwJHI",
-          authDomain: "monateatcharorders-caa7b.firebaseapp.com",
-          projectId: "monateatcharorders-caa7b",
-          storageBucket: "monateatcharorders-caa7b.appspot.com",
-          messagingSenderId: "580208795862",
-          appId: "1:580208795862:web:fbca708465b8c34138e977",
-          measurementId: "G-B67L2792K0"
+            apiKey: "AIzaSyA1DPfEa2t4vzoGgU71SptWBb_zUbkqaRI",
+            authDomain: "monateatchar-352af.firebaseapp.com",
+            projectId: "monateatchar-352af",
+            storageBucket: "monateatchar-352af.appspot.com",
+            messagingSenderId: "825580346675",
+            appId: "1:825580346675:web:da06e6d2fb641a44317246",
+            measurementId: "G-0TRDSM6VJS"
         };
+
+        // Import Firebase Modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js';
+        import { getFirestore, collection, addDoc, doc, setDoc, getDoc, updateDoc, getDocs, onSnapshot, query, orderBy, limit, where } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js';
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        getAnalytics(app);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // Elements
+        // Global Elements
         const authSection = document.getElementById('authSection');
         const overlay = document.getElementById('overlay');
         const homeSections = document.getElementById('homeSections');
@@ -608,20 +687,173 @@
         const whatsappIcon = document.querySelector('.whatsapp-icon');
         const loginLink = document.getElementById('loginLink');
         const dashboardLink = document.getElementById('dashboardLink');
-        const navLinks = document.querySelectorAll('nav a:not(#loginLink):not(#dashboardLink)');
+        const homeLinks = document.querySelectorAll('.home-link');
 
-        // Auth containers
+        // Auth Containers
         const loginContainer = document.getElementById('loginContainer');
         const registerContainer = document.getElementById('registerContainer');
         const forgotContainer = document.getElementById('forgotContainer');
 
-        // Loading elements
+        // Loading and Error Elements
         const loginLoading = document.getElementById('loginLoading');
         const registerLoading = document.getElementById('registerLoading');
         const forgotLoading = document.getElementById('forgotLoading');
         const orderLoading = document.getElementById('orderLoading');
+        const loginError = document.getElementById('loginError');
 
-        // Toggle links
+        // Product Data (Centralized)
+        const products = [
+            { flavor: 'plain', name: 'Plain Atchar', description: 'Classic tangy goodness with just the right balance of spices. Perfect for everyday meals.', img: 'Plain.png', price: 60 },
+            { flavor: 'garlic', name: 'Garlic Atchar', description: 'Infused with fresh garlic for an extra aromatic punch. Ideal for garlic lovers!', img: 'Garlic.png', price: 60 },
+            { flavor: 'hot', name: 'Hot Atchar', description: 'Fiery and bold with chilies that pack a heat. For those who like it spicy!', img: 'Hot.png', price: 60 },
+            { flavor: 'mild', name: 'Mild Atchar', description: 'Gentle flavors with subtle spices. Great for kids or mild palates.', img: 'Mild.png', price: 60 }
+        ];
+
+        // Cart State
+        let cart = [];
+
+        // Functions
+
+        // Close Popup
+        window.closePopup = function() {
+            authSection.style.display = 'none';
+            overlay.style.display = 'none';
+        };
+
+        // Render Products
+        function renderProducts(containerId, addToCart = false) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.dataset.flavor = product.flavor;
+                card.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/250?text=${product.name.replace(' ', '+')}';" loading="lazy">
+                    <h3>${product.name}</h3>
+                    <p class="description">${product.description}</p>
+                    <p>R${product.price} (Medium Size)</p>
+                `;
+                if (addToCart) {
+                    const btn = document.createElement('button');
+                    btn.textContent = 'Add to Cart';
+                    btn.onclick = () => addToCartFunc(product.flavor);
+                    card.appendChild(btn);
+                }
+                container.appendChild(card);
+            });
+        }
+
+        // Add to Cart
+        function addToCartFunc(flavor) {
+            getDoc(doc(db, 'stock', flavor)).then(stockDoc => {
+                const available = stockDoc.exists() ? stockDoc.data().quantity : 0;
+                if (available <= 0) {
+                    alert('Out of stock!');
+                    return;
+                }
+                const item = cart.find(i => i.flavor === flavor);
+                if (item) item.quantity++;
+                else cart.push({ flavor, quantity: 1, price: 60 });
+                renderCart();
+            }).catch(error => console.error('Stock check error:', error));
+        }
+
+        // Render Cart
+        function renderCart() {
+            const cartContainer = document.getElementById('userCart');
+            cartContainer.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.quantity * item.price;
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `${item.flavor} x ${item.quantity} - R${item.quantity * item.price}`;
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.onclick = () => {
+                    cart.splice(index, 1);
+                    renderCart();
+                };
+                div.appendChild(removeBtn);
+                cartContainer.appendChild(div);
+            });
+            document.getElementById('cartTotal').textContent = `Total: R${total}`;
+        }
+
+        // Load User Order History
+        function loadUserOrderHistory(userId) {
+            const ordersQuery = query(collection(db, 'orders'), where('userId', '==', userId), orderBy('timestamp', 'desc'), limit(10));
+            onSnapshot(ordersQuery, (snapshot) => {
+                const history = document.getElementById('userOrderHistory');
+                history.innerHTML = '';
+                if (snapshot.empty) history.innerHTML = '<p>No orders yet.</p>';
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    history.innerHTML += `<p>Order ID: ${doc.id} | Items: ${data.items.map(i => `${i.flavor} x ${i.quantity}`).join(', ')} | Total: R${data.totalPrice} | Status: ${data.status} | Message: ${data.message || ''} | Time: ${data.timestamp}</p>`;
+                });
+            }, error => console.error('Order history error:', error));
+        }
+
+        // Load Admin Dashboard
+        async function loadAdminDashboard() {
+            const flavors = products.map(p => p.flavor);
+            const stockTableBody = document.getElementById('stockTableBody');
+            stockTableBody.innerHTML = '';
+            for (const flavor of flavors) {
+                const stockDoc = await getDoc(doc(db, 'stock', flavor));
+                const quantity = stockDoc.exists() ? stockDoc.data().quantity : 0;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${flavor.charAt(0).toUpperCase() + flavor.slice(1)}</td>
+                    <td>${quantity}</td>
+                    <td><input type="number" value="${quantity}" min="0"><button class="update-stock">Update</button></td>
+                `;
+                stockTableBody.appendChild(row);
+            }
+            document.querySelectorAll('.update-stock').forEach((btn, index) => {
+                btn.addEventListener('click', () => {
+                    const newQty = parseInt(btn.previousElementSibling.value);
+                    const flavor = flavors[index];
+                    updateStock(flavor, newQty);
+                });
+            });
+
+            const ordersQuery = query(collection(db, 'orders'), orderBy('timestamp', 'desc'), limit(20));
+            onSnapshot(ordersQuery, (snapshot) => {
+                const recentOrders = document.getElementById('recentOrders');
+                recentOrders.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const div = document.createElement('div');
+                    div.innerHTML = `<p>Order ID: ${doc.id} | Items: ${data.items.map(i => `${i.flavor} x ${i.quantity}`).join(', ')} | Total: R${data.totalPrice} | Status: ${data.status} | Customer: ${data.name} | Location: ${data.address} | Time: ${data.timestamp}</p>`;
+                    if (data.status === 'Pending') {
+                        const completeBtn = document.createElement('button');
+                        completeBtn.textContent = 'Mark Complete';
+                        completeBtn.onclick = () => updateDoc(doc.ref, { status: 'Completed', message: 'We are preparing your order. We will contact you to deliver.' });
+                        div.appendChild(completeBtn);
+                    }
+                    recentOrders.appendChild(div);
+                });
+            }, error => console.error('Recent orders error:', error));
+        }
+
+        // Update Stock
+        async function updateStock(flavor, newQuantity) {
+            try {
+                await setDoc(doc(db, 'stock', flavor), { quantity: newQuantity }, { merge: true });
+                console.log('Stock updated for', flavor);
+                alert('Stock updated.');
+                loadAdminDashboard();
+            } catch (error) {
+                console.error('Update stock error:', error);
+                alert('Error: ' + error.message);
+            }
+        }
+
+        // Event Listeners
+
+        // Toggle Auth Containers
         document.getElementById('registerLink').addEventListener('click', (e) => {
             e.preventDefault();
             loginContainer.style.display = 'none';
@@ -650,80 +882,27 @@
             forgotContainer.style.display = 'none';
         });
 
-        // Initial setup
-        homeSections.style.display = 'block';
-        navLinks.forEach(link => link.style.display = 'inline');
-        loginLink.style.display = 'inline';
-        dashboardLink.style.display = 'none';
-        authSection.style.display = 'none';
-        overlay.style.display = 'none';
-
-        // Auth state listener
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const userDoc = await getDoc(doc(db, 'users', user.uid));
-                if (userDoc.exists()) {
-                    const role = userDoc.data().role;
-                    authSection.style.display = 'none';
-                    overlay.style.display = 'none';
-                    homeSections.style.display = 'block';
-                    navLinks.forEach(link => link.style.display = 'inline');
-                    dashboardLink.style.display = 'inline';
-                    loginLink.innerHTML = '<i class="fas fa-sign-out-alt"></i>';
-                    loginLink.title = 'Logout';
-                    loginLink.href = '#';
-                    loginLink.onclick = (e) => {
-                        e.preventDefault();
-                        signOut(auth);
-                    };
-                    if (role === 'user') {
-                        dashboardLink.href = '#userDashboard';
-                        userDashboard.style.display = 'block';
-                        adminDashboard.style.display = 'none';
-                        whatsappIcon.style.display = 'flex';
-                        document.getElementById('userName').textContent = userDoc.data().name;
-                        loadUserOrderHistory(user.uid);
-                    } else if (role === 'admin') {
-                        dashboardLink.href = '#adminDashboard';
-                        userDashboard.style.display = 'none';
-                        adminDashboard.style.display = 'block';
-                        whatsappIcon.style.display = 'none';
-                        loadAdminDashboard();
-                    }
-                }
-            } else {
-                authSection.style.display = 'none';
-                overlay.style.display = 'none';
-                homeSections.style.display = 'block';
-                userDashboard.style.display = 'none';
-                adminDashboard.style.display = 'none';
-                whatsappIcon.style.display = 'none';
-                navLinks.forEach(link => link.style.display = 'inline');
-                dashboardLink.style.display = 'none';
-                loginLink.innerHTML = '<i class="fas fa-user"></i>';
-                loginLink.title = 'Login/Register';
-                loginLink.href = '#authSection';
-                loginLink.onclick = (e) => {
-                    e.preventDefault();
-                    authSection.style.display = 'block';
-                    overlay.style.display = 'block';
-                    loginContainer.style.display = 'block';
-                    registerContainer.style.display = 'none';
-                    forgotContainer.style.display = 'none';
-                };
+        // Password Strength Indicator
+        const regPassword = document.getElementById('regPassword');
+        const passwordStrength = document.getElementById('passwordStrength');
+        regPassword.addEventListener('input', () => {
+            const val = regPassword.value;
+            let strength = 'Weak';
+            if (val.length >= 8 && /\d/.test(val) && /[a-z]/.test(val) && /[A-Z]/.test(val)) {
+                strength = 'Strong';
+            } else if (val.length >= 6) {
+                strength = 'Medium';
             }
+            passwordStrength.textContent = `Password strength: ${strength}`;
+            passwordStrength.style.color = strength === 'Strong' ? 'green' : strength === 'Medium' ? 'orange' : 'red';
         });
 
-        // Function to close popup
-        window.closePopup = function() {
-            authSection.style.display = 'none';
-            overlay.style.display = 'none';
-        };
-
-        // Register Form
+        // Register Form Submit
         const registerForm = document.getElementById('registerForm');
         registerForm.addEventListener('submit', async (event) => {
             event.preventDefault();
+            const btn = registerForm.querySelector('button');
+            btn.disabled = true;
             const formData = new FormData(registerForm);
             const email = formData.get('email');
             const password = formData.get('password');
@@ -734,14 +913,16 @@
 
             if (password !== confirmPassword) {
                 document.getElementById('passwordMatchError').style.display = 'block';
+                btn.disabled = false;
                 return;
             } else {
                 document.getElementById('passwordMatchError').style.display = 'none';
             }
 
-            // Validation (simplified)
-            if (!email.includes('@') || !/^0\d{9}$/.test(phone)) {
-                alert('Invalid email or phone');
+            if (!registerForm.checkValidity()) {
+                document.getElementById('regEmailError').style.display = 'block';
+                document.getElementById('regPhoneError').style.display = 'block';
+                btn.disabled = false;
                 return;
             }
 
@@ -754,52 +935,71 @@
                 await sendEmailVerification(userCredential.user);
                 alert('Registration successful! Please check your email for verification and then login.');
                 registerForm.reset();
-                // Switch to login
                 loginContainer.style.display = 'block';
                 registerContainer.style.display = 'none';
             } catch (error) {
+                console.error('Registration error:', error);
                 alert(error.message);
             } finally {
                 registerLoading.style.display = 'none';
+                btn.disabled = false;
             }
         });
 
-        // Login Form
+        // Login Form Submit
         const loginForm = document.getElementById('loginForm');
         loginForm.addEventListener('submit', async (event) => {
             event.preventDefault();
+            const btn = loginForm.querySelector('button');
+            btn.disabled = true;
             const formData = new FormData(loginForm);
             const email = formData.get('email');
             const password = formData.get('password');
             const selectedRole = formData.get('role');
 
+            if (!email || !password) {
+                loginError.textContent = 'Please enter a valid email and password.';
+                loginError.style.display = 'block';
+                btn.disabled = false;
+                return;
+            } else {
+                loginError.style.display = 'none';
+            }
+
             loginLoading.style.display = 'block';
             try {
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
                 if (!userCredential.user.emailVerified) {
-                    alert('Please verify your email before logging in.');
-                    signOut(auth);
+                    loginError.textContent = 'Please verify your email before logging in.';
+                    loginError.style.display = 'block';
+                    await signOut(auth);
+                    btn.disabled = false;
                     return;
                 }
                 const userDoc = await getDoc(doc(db, 'users', userCredential.user.uid));
                 if (userDoc.exists() && userDoc.data().role === selectedRole) {
-                    // Login successful, hide auth
                     authSection.style.display = 'none';
                     overlay.style.display = 'none';
                 } else {
-                    throw new Error('Invalid role for this user.');
+                    await signOut(auth);
+                    throw new Error('Invalid role for this user. Please select the correct role.');
                 }
             } catch (error) {
-                alert(error.message);
+                console.error('Login error:', error);
+                loginError.textContent = error.message;
+                loginError.style.display = 'block';
             } finally {
                 loginLoading.style.display = 'none';
+                btn.disabled = false;
             }
         });
 
-        // Forgot Password Form
+        // Forgot Password Submit
         const forgotForm = document.getElementById('forgotForm');
         forgotForm.addEventListener('submit', async (event) => {
             event.preventDefault();
+            const btn = forgotForm.querySelector('button');
+            btn.disabled = true;
             const formData = new FormData(forgotForm);
             const email = formData.get('email');
 
@@ -808,141 +1008,160 @@
                 await sendPasswordResetEmail(auth, email);
                 alert('Password reset email sent! Check your inbox.');
                 forgotForm.reset();
-                // Switch back to login
                 loginContainer.style.display = 'block';
                 forgotContainer.style.display = 'none';
             } catch (error) {
+                console.error('Forgot password error:', error);
                 alert(error.message);
             } finally {
                 forgotLoading.style.display = 'none';
+                btn.disabled = false;
             }
         });
 
-        // User Order Form
-        const userOrderForm = document.getElementById('userOrderForm');
-        const userQuantity = document.getElementById('userQuantity');
-        const userTotalPrice = document.getElementById('userTotalPrice');
-
-        userQuantity.addEventListener('input', () => {
-            const qty = parseInt(userQuantity.value) || 1;
-            const total = qty * 60;
-            userTotalPrice.textContent = `Total: R${total}`;
-        });
-
-        userOrderForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
+        // Submit Order
+        document.getElementById('submitOrder').addEventListener('click', async () => {
             const user = auth.currentUser;
-            if (!user) return;
-
-            const formData = new FormData(userOrderForm);
-            const flavor = formData.get('flavor');
-            const quantity = parseInt(formData.get('quantity'));
-            const notes = formData.get('notes');
-
-            const userDoc = await getDoc(doc(db, 'users', user.uid));
-            const userData = userDoc.data();
-
-            // Check stock
-            const stockDoc = await getDoc(doc(db, 'stock', flavor));
-            if (!stockDoc.exists() || stockDoc.data().quantity < quantity) {
-                alert('Insufficient stock for this flavor.');
-                return;
-            }
-
+            if (!user || cart.length === 0) return;
+            const btn = document.getElementById('submitOrder');
+            btn.disabled = true;
             orderLoading.style.display = 'block';
-            const orderDetails = {
-                flavor,
-                quantity,
-                totalPrice: quantity * 60,
-                name: userData.name,
-                email: userData.email,
-                phone: userData.phone,
-                address: userData.address,
-                notes,
-                timestamp: new Date().toISOString(),
-                userId: user.uid
-            };
-
             try {
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                const userData = userDoc.data();
+                const orderDetails = {
+                    items: cart,
+                    totalPrice: cart.reduce((sum, item) => sum + item.quantity * item.price, 0),
+                    name: userData.name,
+                    email: userData.email,
+                    phone: userData.phone,
+                    address: userData.address,
+                    notes: document.getElementById('userNotes').value,
+                    timestamp: new Date().toISOString(),
+                    userId: user.uid,
+                    status: 'Pending'
+                };
                 const docRef = await addDoc(collection(db, 'orders'), orderDetails);
-                // Update stock
-                await updateDoc(doc(db, 'stock', flavor), {
-                    quantity: stockDoc.data().quantity - quantity
-                });
-                alert(`Thank you for your order!\nOrder ID: ${docRef.id}`);
-                userOrderForm.reset();
-                userTotalPrice.textContent = 'Total: R60';
+                for (const item of cart) {
+                    const stockRef = doc(db, 'stock', item.flavor);
+                    const stockDoc = await getDoc(stockRef);
+                    const currentQuantity = stockDoc.exists() ? stockDoc.data().quantity : 0;
+                    await setDoc(stockRef, { quantity: currentQuantity - item.quantity }, { merge: true });
+                }
+                alert(`Order submitted! ID: ${docRef.id}`);
+                cart = [];
+                renderCart();
+                document.getElementById('userNotes').value = '';
                 loadUserOrderHistory(user.uid);
             } catch (error) {
-                alert('Error submitting order.');
+                console.error('Order submit error:', error);
+                alert('Error: ' + error.message);
             } finally {
                 orderLoading.style.display = 'none';
+                btn.disabled = false;
             }
         });
 
-        // Load user order history
-        function loadUserOrderHistory(userId) {
-            const ordersQuery = query(collection(db, 'orders'), where('userId', '==', userId), orderBy('timestamp', 'desc'));
-            onSnapshot(ordersQuery, (snapshot) => {
-                const userOrderHistory = document.getElementById('userOrderHistory');
-                userOrderHistory.innerHTML = '';
-                if (snapshot.empty) {
-                    userOrderHistory.innerHTML = '<p>No orders yet.</p>';
-                } else {
-                    snapshot.forEach((doc) => {
-                        const data = doc.data();
-                        userOrderHistory.innerHTML += `<p>Order ID: ${doc.id} | Flavor: ${data.flavor} | Qty: ${data.quantity} | Total: R${data.totalPrice} | Time: ${data.timestamp}</p>`;
-                    });
+        // Admin Logout
+        document.getElementById('adminLogout').addEventListener('click', async () => {
+            if (confirm('Logout?')) {
+                try {
+                    await signOut(auth);
+                    console.log('Admin logged out successfully');
+                    window.scrollTo(0, 0);
+                } catch (error) {
+                    console.error('Logout error:', error);
+                    alert('Error logging out: ' + error.message);
                 }
-            });
-        }
-
-        // Logout buttons (optional, since logout in nav)
-        document.getElementById('userLogout').addEventListener('click', () => signOut(auth));
-        document.getElementById('adminLogout').addEventListener('click', () => signOut(auth));
-
-        // Admin Dashboard Load
-        async function loadAdminDashboard() {
-            // Load stock
-            const flavors = ['plain', 'garlic', 'hot', 'mild'];
-            const stockTableBody = document.getElementById('stockTableBody');
-            stockTableBody.innerHTML = '';
-            for (const flavor of flavors) {
-                const stockDoc = await getDoc(doc(db, 'stock', flavor));
-                const quantity = stockDoc.exists() ? stockDoc.data().quantity : 0;
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${flavor.charAt(0).toUpperCase() + flavor.slice(1)}</td>
-                    <td>${quantity}</td>
-                    <td><input type="number" value="${quantity}" data-flavor="${flavor}"><button onclick="updateStock('${flavor}', this.previousElementSibling.value)">Update</button></td>
-                `;
-                stockTableBody.appendChild(row);
             }
+        });
 
-            // Load recent orders
-            const ordersQuery = query(collection(db, 'orders'), orderBy('timestamp', 'desc'), limit(10));
-            onSnapshot(ordersQuery, (snapshot) => {
-                const recentOrders = document.getElementById('recentOrders');
-                recentOrders.innerHTML = '';
-                snapshot.forEach((doc) => {
-                    const data = doc.data();
-                    recentOrders.innerHTML += `<p>Order ID: ${doc.id} | Flavor: ${data.flavor} | Qty: ${data.quantity} | Total: R${data.totalPrice} | Time: ${data.timestamp}</p>`;
-                });
-            });
-        }
-
-        // Update stock function
-        window.updateStock = async (flavor, newQuantity) => {
-            try {
-                await updateDoc(doc(db, 'stock', flavor), { quantity: parseInt(newQuantity) });
-                alert('Stock updated.');
-                loadAdminDashboard();
-            } catch (error) {
-                alert('Error updating stock.');
+        // Auth State Change Listener
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                console.log('User logged in:', user.uid);
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                if (userDoc.exists()) {
+                    const role = userDoc.data().role;
+                    const userData = userDoc.data();
+                    authSection.style.display = 'none';
+                    overlay.style.display = 'none';
+                    dashboardLink.style.display = 'inline';
+                    loginLink.innerHTML = '<i class="fas fa-sign-out-alt"></i>';
+                    loginLink.title = 'Logout';
+                    loginLink.href = '#';
+                    loginLink.onclick = (e) => {
+                        e.preventDefault();
+                        if (confirm('Logout?')) {
+                            signOut(auth).then(() => {
+                                window.scrollTo(0, 0);
+                            });
+                        }
+                    };
+                    if (role === 'user') {
+                        homeLinks.forEach(link => link.style.display = 'none');
+                        homeSections.style.display = 'none';
+                        dashboardLink.href = '#userDashboard';
+                        userDashboard.style.display = 'block';
+                        adminDashboard.style.display = 'none';
+                        whatsappIcon.style.display = 'flex';
+                        document.getElementById('userName').textContent = userData.name;
+                        document.getElementById('userEmail').textContent = userData.email;
+                        document.getElementById('userPhone').textContent = userData.phone;
+                        document.getElementById('userAddress').textContent = userData.address;
+                        renderProducts('userProducts', true);
+                        loadUserOrderHistory(user.uid);
+                        document.body.classList.remove('admin-mode');
+                    } else if (role === 'admin') {
+                        homeLinks.forEach(link => link.style.display = 'none');
+                        homeSections.style.display = 'none';
+                        dashboardLink.href = '#adminDashboard';
+                        userDashboard.style.display = 'none';
+                        adminDashboard.style.display = 'block';
+                        whatsappIcon.style.display = 'none';
+                        loadAdminDashboard();
+                        document.body.classList.add('admin-mode');
+                    }
+                } else {
+                    signOut(auth);
+                }
+            } else {
+                console.log('User logged out');
+                authSection.style.display = 'none';
+                overlay.style.display = 'none';
+                homeSections.style.display = 'block';
+                userDashboard.style.display = 'none';
+                adminDashboard.style.display = 'none';
+                whatsappIcon.style.display = 'none';
+                homeLinks.forEach(link => link.style.display = 'inline');
+                dashboardLink.style.display = 'none';
+                loginLink.innerHTML = '<i class="fas fa-user"></i>';
+                loginLink.title = 'Login/Register';
+                loginLink.href = '#authSection';
+                loginLink.onclick = (e) => {
+                    e.preventDefault();
+                    authSection.style.display = 'block';
+                    overlay.style.display = 'block';
+                    loginContainer.style.display = 'block';
+                    registerContainer.style.display = 'none';
+                    forgotContainer.style.display = 'none';
+                };
+                document.body.classList.remove('admin-mode');
             }
-        };
+        });
 
-        // Nav functionality remains similar
+        // Initial Setup
+        homeSections.style.display = 'block';
+        homeLinks.forEach(link => link.style.display = 'inline');
+        loginLink.style.display = 'inline';
+        dashboardLink.style.display = 'none';
+        authSection.style.display = 'none';
+        overlay.style.display = 'none';
+
+        // Render Home Products
+        renderProducts('homeProducts');
+
+        // Navigation Active State
         const sections = document.querySelectorAll('.container[id]');
         const observerOptions = {
             root: null,
