@@ -622,8 +622,9 @@
         <textarea id="userNotes" placeholder="Additional Notes" rows="3"></textarea>
         <button id="submitOrder" type="button">Submit Order</button>
         <p class="loading" id="orderLoading">Loading...</p>
-        <h3>Your Order History</h3>
+        <h3>Order Status and Tracking</h3>
         <div id="userOrderHistory"></div>
+        <p>Note: Your order status updates in real-time. When the status changes to 'Completed', your order is ready, and you will receive a call for delivery.</p>
     </div>
 
     <!-- Admin Dashboard -->
@@ -643,7 +644,6 @@
         </table>
         <h3>Recent Orders</h3>
         <div id="recentOrders"></div>
-        <button type="button" class="logout-btn" id="adminLogout">Logout</button>
     </div>
 
     <!-- Footer -->
@@ -657,7 +657,7 @@
     </a>
 
     <script type="module">
-        // Firebase Configuration - REPLACE WITH YOUR ACTUAL VALUES!
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyA1DPfEa2t4vzoGgU71SptWBb_zUbkqaRI",
             authDomain: "monateatchar-352af.firebaseapp.com",
@@ -729,7 +729,7 @@
                 card.className = 'product-card';
                 card.dataset.flavor = product.flavor;
                 card.innerHTML = `
-                    <img src="${product.img}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/250?text=${product.name.replace(' ', '+')}';" loading="lazy">
+                    <img src="${product.img}" alt="${product.name}" loading="lazy">
                     <h3>${product.name}</h3>
                     <p class="description">${product.description}</p>
                     <p>R${product.price} (Medium Size)</p>
@@ -788,9 +788,9 @@
                 const history = document.getElementById('userOrderHistory');
                 history.innerHTML = '';
                 if (snapshot.empty) history.innerHTML = '<p>No orders yet.</p>';
-                snapshot.forEach(doc => {
-                    const data = doc.data();
-                    history.innerHTML += `<p>Order ID: ${doc.id} | Items: ${data.items.map(i => `${i.flavor} x ${i.quantity}`).join(', ')} | Total: R${data.totalPrice} | Status: ${data.status} | Message: ${data.message || ''} | Time: ${data.timestamp}</p>`;
+                snapshot.forEach(orderDoc => {
+                    const data = orderDoc.data();
+                    history.innerHTML += `<p>Order ID: ${orderDoc.id} | Items: ${data.items.map(i => `${i.flavor} x ${i.quantity}`).join(', ')} | Total: R${data.totalPrice} | Status: ${data.status} | Message: ${data.message || ''} | Time: ${data.timestamp}</p>`;
                 });
             }, error => console.error('Order history error:', error));
         }
@@ -823,14 +823,16 @@
             onSnapshot(ordersQuery, (snapshot) => {
                 const recentOrders = document.getElementById('recentOrders');
                 recentOrders.innerHTML = '';
-                snapshot.forEach(doc => {
-                    const data = doc.data();
+                snapshot.forEach(orderDoc => {
+                    const data = orderDoc.data();
                     const div = document.createElement('div');
-                    div.innerHTML = `<p>Order ID: ${doc.id} | Items: ${data.items.map(i => `${i.flavor} x ${i.quantity}`).join(', ')} | Total: R${data.totalPrice} | Status: ${data.status} | Customer: ${data.name} | Location: ${data.address} | Time: ${data.timestamp}</p>`;
+                    div.innerHTML = `<p>Order ID: ${orderDoc.id} | Items: ${data.items.map(i => `${i.flavor} x ${i.quantity}`).join(', ')} | Total: R${data.totalPrice} | Status: ${data.status} | Customer: ${data.name} | Phone: ${data.phone} | Location: ${data.address} | Time: ${data.timestamp}</p>`;
                     if (data.status === 'Pending') {
                         const completeBtn = document.createElement('button');
                         completeBtn.textContent = 'Mark Complete';
-                        completeBtn.onclick = () => updateDoc(doc.ref, { status: 'Completed', message: 'We are preparing your order. We will contact you to deliver.' });
+                        completeBtn.onclick = () => {
+                            updateDoc(doc(db, 'orders', orderDoc.id), { status: 'Completed', message: 'Your order is ready. You will receive a call for delivery.' });
+                        };
                         div.appendChild(completeBtn);
                     }
                     recentOrders.appendChild(div);
@@ -980,6 +982,7 @@
                 if (userDoc.exists() && userDoc.data().role === selectedRole) {
                     authSection.style.display = 'none';
                     overlay.style.display = 'none';
+                    location.reload();
                 } else {
                     await signOut(auth);
                     throw new Error('Invalid role for this user. Please select the correct role.');
@@ -1062,20 +1065,6 @@
             }
         });
 
-        // Admin Logout
-        document.getElementById('adminLogout').addEventListener('click', async () => {
-            if (confirm('Logout?')) {
-                try {
-                    await signOut(auth);
-                    console.log('Admin logged out successfully');
-                    window.scrollTo(0, 0);
-                } catch (error) {
-                    console.error('Logout error:', error);
-                    alert('Error logging out: ' + error.message);
-                }
-            }
-        });
-
         // Auth State Change Listener
         onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -1095,7 +1084,8 @@
                         if (confirm('Logout?')) {
                             signOut(auth).then(() => {
                                 window.scrollTo(0, 0);
-                            });
+                                location.reload();
+                            }).catch(error => console.error('Logout error:', error));
                         }
                     };
                     if (role === 'user') {
@@ -1105,10 +1095,10 @@
                         userDashboard.style.display = 'block';
                         adminDashboard.style.display = 'none';
                         whatsappIcon.style.display = 'flex';
-                        document.getElementById('userName').textContent = userData.name;
+                        document.getElementById('userName').textContent = userData.name || 'Dummy Name';
                         document.getElementById('userEmail').textContent = userData.email;
-                        document.getElementById('userPhone').textContent = userData.phone;
-                        document.getElementById('userAddress').textContent = userData.address;
+                        document.getElementById('userPhone').textContent = userData.phone || 'Dummy Phone';
+                        document.getElementById('userAddress').textContent = userData.address || 'Dummy Address';
                         renderProducts('userProducts', true);
                         loadUserOrderHistory(user.uid);
                         document.body.classList.remove('admin-mode');
