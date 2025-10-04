@@ -438,6 +438,97 @@
             margin-top: 20px;
         }
 
+        /* Order Item Styles */
+        .order-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .order-item p {
+            margin: 8px 0;
+            font-size: 1em;
+        }
+        .status-Pending {
+            color: orange;
+            font-weight: bold;
+        }
+        .status-Ready-for-Delivery {
+            color: green;
+            font-weight: bold;
+        }
+
+        /* Order Tracker Styles */
+        .order-tracker {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            position: relative;
+        }
+        .order-tracker::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ddd;
+            z-index: 0;
+        }
+        .progress-fill {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 2px;
+            width: 0;
+            background: #ff6600;
+            z-index: 0;
+            transition: width 0.5s ease, background-color 0.5s ease;
+        }
+        .order-tracker.pending .progress-fill {
+            width: 50%;
+        }
+        .order-tracker.completed .progress-fill {
+            width: 100%;
+            background: #4caf50;
+        }
+        .step {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            background: #fff;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            flex: 1;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+        .step.pending-active {
+            background: #ff6600;
+            color: white;
+            border-color: #ff6600;
+            animation: activateStep 0.5s ease-in-out;
+        }
+        .step.ready-active {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+            animation: activateStep 0.5s ease-in-out;
+        }
+        .step.completed {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+            animation: activateStep 0.5s ease-in-out;
+        }
+        @keyframes activateStep {
+            from { transform: scale(0.95); opacity: 0.8; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
         /* Media Queries */
         @media (max-width: 768px) {
             header {
@@ -477,11 +568,42 @@
                 padding: 30px;
             }
             .whatsapp-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 35px;
-                bottom: 20px;
-                right: 20px;
+                bottom: 10px;
+                right: 10px;
+                width: 50px;
+                height: 50px;
+                font-size: 30px;
+            }
+            .order-tracker {
+                flex-direction: column;
+            }
+            .order-tracker::before {
+                height: auto;
+                width: 2px;
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                background: #ddd;
+            }
+            .progress-fill {
+                height: 0;
+                width: 2px;
+                top: 0;
+                bottom: auto;
+                left: 50%;
+                transition: height 0.5s ease, background-color 0.5s ease;
+            }
+            .order-tracker.pending .progress-fill {
+                height: 50%;
+                width: 2px;
+            }
+            .order-tracker.completed .progress-fill {
+                height: 100%;
+                width: 2px;
+                background: #4caf50;
+            }
+            .step {
+                margin: 10px 0;
             }
         }
     </style>
@@ -512,7 +634,7 @@
 
     <!-- Authentication Section -->
     <div id="authSection" role="dialog" aria-modal="true">
-        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <button type="button" class="close-btn" onclick="closePopup()" aria-label="Close authentication popup">&times;</button>
         <!-- Login Form -->
         <div id="loginContainer">
             <h2>Login</h2>
@@ -548,8 +670,8 @@
                 <span class="error" id="regEmailError">Please enter a valid email address.</span>
 
                 <label for="regPhone">Your Phone Number:</label>
-                <input type="tel" id="regPhone" name="phone" required pattern="[+]?[0-9]{10,12}" title="Phone number: 10-12 digits, optional + prefix">
-                <span class="error" id="regPhoneError">Please enter a valid phone number.</span>
+                <input type="tel" id="regPhone" name="phone" required pattern="\+?[1-9]\d{1,14}" title="International phone number (E.164 format: optional + followed by 2 to 15 digits)">
+                <span class="error" id="regPhoneError">Please enter a valid international phone number.</span>
 
                 <label for="regAddress">Delivery Address:</label>
                 <textarea id="regAddress" name="address" rows="4" required aria-required="true"></textarea>
@@ -624,7 +746,7 @@
         <p class="loading" id="orderLoading">Loading...</p>
         <h3>Order Status and Tracking</h3>
         <div id="userOrderHistory"></div>
-        <p>Note: Your order status updates in real-time. When the status changes to 'Completed', your order is ready, and you will receive a call for delivery.</p>
+        <p>Note: Your order status updates in real-time. When the status changes to 'Ready for Delivery', your order is ready, and you will receive a call for delivery.</p>
     </div>
 
     <!-- Admin Dashboard -->
@@ -671,7 +793,7 @@
         // Import Firebase Modules
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js';
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js';
-        import { getFirestore, collection, addDoc, doc, setDoc, getDoc, updateDoc, getDocs, onSnapshot, query, orderBy, limit, where } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js';
+        import { getFirestore, collection, addDoc, doc, setDoc, getDoc, updateDoc, getDocs, onSnapshot, query, orderBy, limit, where, runTransaction } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js';
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
@@ -759,6 +881,30 @@
             }).catch(error => console.error('Stock check error:', error));
         }
 
+        // Increment Cart Item
+        function incrementCart(index) {
+            const flavor = cart[index].flavor;
+            getDoc(doc(db, 'stock', flavor)).then(stockDoc => {
+                const available = stockDoc.exists() ? stockDoc.data().quantity : 0;
+                if (available <= cart[index].quantity) {
+                    alert('No more stock available!');
+                    return;
+                }
+                cart[index].quantity++;
+                renderCart();
+            }).catch(error => console.error('Stock check error:', error));
+        }
+
+        // Decrement Cart Item
+        function decrementCart(index) {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity--;
+            } else {
+                cart.splice(index, 1);
+            }
+            renderCart();
+        }
+
         // Render Cart
         function renderCart() {
             const cartContainer = document.getElementById('userCart');
@@ -768,7 +914,18 @@
                 total += item.quantity * item.price;
                 const div = document.createElement('div');
                 div.className = 'cart-item';
-                div.innerHTML = `${item.flavor} x ${item.quantity} - R${item.quantity * item.price}`;
+                div.innerHTML = `${item.flavor} - R${item.quantity * item.price} `;
+                const qtySpan = document.createElement('span');
+                qtySpan.textContent = `Quantity: ${item.quantity}`;
+                div.appendChild(qtySpan);
+                const incBtn = document.createElement('button');
+                incBtn.textContent = '+';
+                incBtn.onclick = () => incrementCart(index);
+                div.appendChild(incBtn);
+                const decBtn = document.createElement('button');
+                decBtn.textContent = '-';
+                decBtn.onclick = () => decrementCart(index);
+                div.appendChild(decBtn);
                 const removeBtn = document.createElement('button');
                 removeBtn.textContent = 'Remove';
                 removeBtn.onclick = () => {
@@ -779,20 +936,51 @@
                 cartContainer.appendChild(div);
             });
             document.getElementById('cartTotal').textContent = `Total: R${total}`;
+            const user = auth.currentUser;
+            if (user) {
+                localStorage.setItem(`cart_${user.uid}`, JSON.stringify(cart));
+            }
         }
 
         // Load User Order History
         function loadUserOrderHistory(userId) {
-            const ordersQuery = query(collection(db, 'orders'), where('userId', '==', userId), orderBy('timestamp', 'desc'), limit(10));
+            console.log('Loading orders for UID:', userId);  // Should match the test data's userId
+            const ordersQuery = query(collection(db, 'orders'), where('userId', '==', userId), orderBy('timestamp', 'desc'), limit(20));
             onSnapshot(ordersQuery, (snapshot) => {
+                console.log('Orders snapshot size:', snapshot.size);  // If 0, no matching orders (UID mismatch or no data)
+                console.log('Snapshot empty?', snapshot.empty);  // True if no docs
                 const history = document.getElementById('userOrderHistory');
                 history.innerHTML = '';
-                if (snapshot.empty) history.innerHTML = '<p>No orders yet.</p>';
+                if (snapshot.empty) {
+                    history.innerHTML = '<p>No orders yet.</p>';
+                    console.log('No orders found - check if userId matches Firestore or add test data again.');
+                }
                 snapshot.forEach(orderDoc => {
+                    console.log('Order data:', orderDoc.id, orderDoc.data());  // Logs each order's details if any
                     const data = orderDoc.data();
-                    history.innerHTML += `<p>Order ID: ${orderDoc.id} | Items: ${data.items.map(i => `${i.flavor} x ${i.quantity}`).join(', ')} | Total: R${data.totalPrice} | Status: ${data.status} | Message: ${data.message || ''} | Time: ${data.timestamp}</p>`;
+                    const trackerClass = data.status === 'Ready for Delivery' ? 'completed' : 'pending';
+                    const pendingClass = data.status === 'Pending' ? 'pending-active' : (data.status === 'Ready for Delivery' ? 'completed' : '');
+                    const readyClass = data.status === 'Ready for Delivery' ? 'ready-active' : '';
+                    history.innerHTML += `
+                        <div class="order-item">
+                            <p>Order ID: ${orderDoc.id}</p>
+                            <p>Items: ${data.items.map(i => `${i.flavor} x ${i.quantity}`).join(', ')}</p>
+                            <p>Total: R${data.totalPrice}</p>
+                            <p>Time: ${new Date(data.timestamp).toLocaleString()}</p>
+                            <p>Status: <span class="status-${data.status.replace(/\s+/g, '-')}">${data.status}</span></p>
+                            <div class="order-tracker ${trackerClass}">
+                                <div class="progress-fill"></div>
+                                <div class="step ${pendingClass}">1. Order Pending</div>
+                                <div class="step ${readyClass}">2. Ready for Delivery</div>
+                            </div>
+                            <p>Message: ${data.message || ''}</p>
+                        </div>
+                    `;
                 });
-            }, error => console.error('Order history error:', error));
+            }, error => {
+                console.error('Order history error:', error);  // Will log if permissions or other issues
+                alert('Error loading orders: ' + error.message);
+            });
         }
 
         // Load Admin Dashboard
@@ -803,11 +991,12 @@
             for (const flavor of flavors) {
                 const stockDoc = await getDoc(doc(db, 'stock', flavor));
                 const quantity = stockDoc.exists() ? stockDoc.data().quantity : 0;
+                const capitalizedFlavor = flavor.charAt(0).toUpperCase() + flavor.slice(1);
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${flavor.charAt(0).toUpperCase() + flavor.slice(1)}</td>
+                    <td>${capitalizedFlavor}</td>
                     <td>${quantity}</td>
-                    <td><input type="number" value="${quantity}" min="0"><button class="update-stock">Update</button></td>
+                    <td><input type="number" value="${quantity}" min="0"><button class="update-stock" aria-label="Update stock for ${capitalizedFlavor}">Update</button></td>
                 `;
                 stockTableBody.appendChild(row);
             }
@@ -819,19 +1008,19 @@
                 });
             });
 
-            const ordersQuery = query(collection(db, 'orders'), orderBy('timestamp', 'desc'), limit(20));
+            const ordersQuery = query(collection(db, 'orders'), orderBy('timestamp', 'desc'), limit(30));
             onSnapshot(ordersQuery, (snapshot) => {
                 const recentOrders = document.getElementById('recentOrders');
                 recentOrders.innerHTML = '';
                 snapshot.forEach(orderDoc => {
                     const data = orderDoc.data();
                     const div = document.createElement('div');
-                    div.innerHTML = `<p>Order ID: ${orderDoc.id} | Items: ${data.items.map(i => `${i.flavor} x ${i.quantity}`).join(', ')} | Total: R${data.totalPrice} | Status: ${data.status} | Customer: ${data.name} | Phone: ${data.phone} | Location: ${data.address} | Time: ${data.timestamp}</p>`;
+                    div.innerHTML = `<p>Order ID: ${orderDoc.id} | Items: ${data.items.map(i => `${i.flavor} x ${i.quantity}`).join(', ')} | Total: R${data.totalPrice} | Status: ${data.status} | Customer: ${data.name} | Phone: ${data.phone} | Location: ${data.address} | Time: ${new Date(data.timestamp).toLocaleString()}</p>`;
                     if (data.status === 'Pending') {
                         const completeBtn = document.createElement('button');
                         completeBtn.textContent = 'Mark Complete';
                         completeBtn.onclick = () => {
-                            updateDoc(doc(db, 'orders', orderDoc.id), { status: 'Completed', message: 'Your order is ready. You will receive a call for delivery.' });
+                            updateDoc(doc(db, 'orders', orderDoc.id), { status: 'Ready for Delivery', message: 'Your order is ready. You will receive a call for delivery.' });
                         };
                         div.appendChild(completeBtn);
                     }
@@ -1044,13 +1233,21 @@
                     userId: user.uid,
                     status: 'Pending'
                 };
+                await runTransaction(db, async (transaction) => {
+                    const stockDocs = await Promise.all(cart.map(item => transaction.get(doc(db, 'stock', item.flavor))));
+                    stockDocs.forEach((stockDoc, index) => {
+                        const current = stockDoc.data()?.quantity || 0;
+                        if (current < cart[index].quantity) {
+                            throw new Error(`Insufficient stock for ${cart[index].flavor}`);
+                        }
+                    });
+                    cart.forEach((item, index) => {
+                        const stockRef = doc(db, 'stock', item.flavor);
+                        const current = stockDocs[index].data().quantity;
+                        transaction.set(stockRef, { quantity: current - item.quantity }, { merge: true });
+                    });
+                });
                 const docRef = await addDoc(collection(db, 'orders'), orderDetails);
-                for (const item of cart) {
-                    const stockRef = doc(db, 'stock', item.flavor);
-                    const stockDoc = await getDoc(stockRef);
-                    const currentQuantity = stockDoc.exists() ? stockDoc.data().quantity : 0;
-                    await setDoc(stockRef, { quantity: currentQuantity - item.quantity }, { merge: true });
-                }
                 alert(`Order submitted! ID: ${docRef.id}`);
                 cart = [];
                 renderCart();
@@ -1069,6 +1266,7 @@
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 console.log('User logged in:', user.uid);
+                console.log('Logged-in UID:', user.uid);  // Confirm the exact UID of the current user
                 const userDoc = await getDoc(doc(db, 'users', user.uid));
                 if (userDoc.exists()) {
                     const role = userDoc.data().role;
@@ -1083,6 +1281,7 @@
                         e.preventDefault();
                         if (confirm('Logout?')) {
                             signOut(auth).then(() => {
+                                localStorage.removeItem(`cart_${user.uid}`);
                                 window.scrollTo(0, 0);
                                 location.reload();
                             }).catch(error => console.error('Logout error:', error));
@@ -1099,7 +1298,10 @@
                         document.getElementById('userEmail').textContent = userData.email;
                         document.getElementById('userPhone').textContent = userData.phone || 'Dummy Phone';
                         document.getElementById('userAddress').textContent = userData.address || 'Dummy Address';
+                        cart = JSON.parse(localStorage.getItem(`cart_${user.uid}`)) || [];
                         renderProducts('userProducts', true);
+                        renderCart();
+                        console.log('Calling loadUserOrderHistory with UID:', user.uid);
                         loadUserOrderHistory(user.uid);
                         document.body.classList.remove('admin-mode');
                     } else if (role === 'admin') {
