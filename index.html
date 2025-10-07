@@ -606,6 +606,21 @@
                 margin: 10px 0;
             }
         }
+
+        /* Secure Info Styles */
+        .secure-info {
+            text-align: center;
+            font-size: 1em;
+            color: #4caf50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .secure-info i {
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
@@ -661,6 +676,7 @@
         <!-- Register Form -->
         <div id="registerContainer">
             <h2>Register as User</h2>
+            <p class="secure-info"><i class="fas fa-lock"></i> Your information is secured with encryption and protected by Firebase security.</p>
             <form id="registerForm">
                 <label for="regName">Your Name:</label>
                 <input type="text" id="regName" name="name" required aria-required="true">
